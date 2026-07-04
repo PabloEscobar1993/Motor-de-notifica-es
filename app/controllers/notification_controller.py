@@ -1,4 +1,4 @@
-"""Camada Controller: expõe os endpoints REST da API."""
+"""Camada Controller: expõe os endpoints da API."""
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
