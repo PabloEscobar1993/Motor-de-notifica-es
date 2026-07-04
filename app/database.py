@@ -1,9 +1,14 @@
 """Configuração da conexão com o banco relacional (SQLite)."""
 
+import os
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./notifications.db"
+# Caminho do banco: usa a variável de ambiente DATABASE_URL quando definida
+# (no Docker apontamos para um volume dedicado); caso contrário, grava um
+# arquivo local — ideal para rodar direto pelo Python/VS Code.
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./notifications.db")
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,

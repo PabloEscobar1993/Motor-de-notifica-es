@@ -4,7 +4,16 @@ services:
     container_name: mini-motor-notificacoes
     ports:
       - "8000:8000"
+    environment:
+      # Banco em um volume dedicado (fora da pasta montada) para o SQLite
+      # funcionar de forma estável dentro do container.
+      - DATABASE_URL=sqlite:////data/notifications.db
     volumes:
       # Reflete alterações do código no container (hot reload em desenvolvimento)
       - ./:/app
+      # Volume gerenciado pelo Docker onde o banco SQLite é gravado
+      - db_data:/data
     command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+volumes:
+  db_data:
