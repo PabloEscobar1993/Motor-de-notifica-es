@@ -1,6 +1,6 @@
 """Camada Service: regras de negócio.
 
-Orquestra o Factory Method, a Strategy e o Repository.
+Orquestra o Factory, a Strategy e o Repository.
 """
 
 from app.models.notification import NotificationModel
@@ -21,17 +21,19 @@ class NotificationService:
             type=data.type.value,
         )
 
+
+    """RF02 - Dispara a notificação (envio simulado via Factory + Strategy)."""
     def dispatch_notification(self, notification_id: int) -> NotificationModel:
-        """RF02 - Dispara a notificação (envio simulado via Factory + Strategy)."""
-        notification = self.repository.get(notification_id)
+        
+        notification = self.repository.get(notification_id) #conversa com o repository para buscar a notificação no banco de dados.
         if notification is None:
             raise ValueError("Notificação não encontrada")
 
-        # Factory Method escolhe o objeto certo; dispatch() aplica a Strategy.
-        domain_notification = NotificationFactory.create(
+        # Factory Method escolhe o objeto certo;
+        domain_notification = NotificationFactory.create( 
             notification.type, notification.recipient, notification.message
         )
-        domain_notification.dispatch()
+        domain_notification.dispatch() # Strategy envia.
 
         notification.status = "ENVIADA"
         return self.repository.save(notification)

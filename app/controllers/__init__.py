@@ -1,0 +1,1 @@
+'''só serve pra marcar essa pasta como um pacote Python, não tem nenhuma função além disso.'''
