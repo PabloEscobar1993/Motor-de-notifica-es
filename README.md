@@ -79,6 +79,23 @@ tests/             # Testes com Pytest
    http://127.0.0.1:8000/docs
    ```
 
+## Como Rodar com Docker (recomendado)
+
+Com o **Docker Desktop** aberto, na pasta do projeto:
+
+```bash
+docker compose up --build
+```
+
+A API fica disponível em `http://127.0.0.1:8000/docs` (Swagger). Para parar,
+`Ctrl+C` ou, em outro terminal, `docker compose down`.
+
+Rodar os testes dentro do container:
+
+```bash
+docker compose exec api pytest -v
+```
+
 ## Endpoints (Requisitos Funcionais)
 
 | Método | Rota                                | Requisito | Descrição                       |
