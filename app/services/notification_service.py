@@ -21,19 +21,18 @@ class NotificationService:
             type=data.type.value,
         )
 
-
-    """RF02 - Dispara a notificação (envio simulado via Factory + Strategy)."""
     def dispatch_notification(self, notification_id: int) -> NotificationModel:
-        
-        notification = self.repository.get(notification_id) #conversa com o repository para buscar a notificação no banco de dados.
+        """RF02 - Dispara a notificação (envio simulado via Factory + Strategy)."""
+        # conversa com o repository para buscar a notificação no banco de dados.
+        notification = self.repository.get(notification_id)
         if notification is None:
             raise ValueError("Notificação não encontrada")
 
         # Factory Method escolhe o objeto certo;
-        domain_notification = NotificationFactory.create( 
+        domain_notification = NotificationFactory.create(
             notification.type, notification.recipient, notification.message
         )
-        domain_notification.dispatch() # Strategy envia.
+        domain_notification.dispatch()  # Strategy envia.
 
         notification.status = "ENVIADA"
         return self.repository.save(notification)
