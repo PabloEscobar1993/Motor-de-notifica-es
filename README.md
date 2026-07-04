@@ -49,37 +49,7 @@ app/
 tests/             # Testes com Pytest
 ```
 
-## Como Rodar
-
-1. Criar e ativar um ambiente virtual (opcional, recomendado):
-
-   ```bash
-   python -m venv .venv
-   # Windows
-   .venv\Scripts\activate
-   # Linux/Mac
-   source .venv/bin/activate
-   ```
-
-2. Instalar as dependências:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Subir a API:
-
-   ```bash
-   uvicorn app.main:app --reload
-   ```
-
-4. Abrir o **Swagger** no navegador:
-
-   ```
-   http://127.0.0.1:8000/docs
-   ```
-
-## Como Rodar com Docker (recomendado)
+## Como Rodar (Docker)
 
 Com o **Docker Desktop** aberto, na pasta do projeto:
 
@@ -117,11 +87,11 @@ Exemplo de corpo para criar (RF01):
 ## Como Rodar os Testes
 
 ```bash
-pytest -v
+docker compose exec api pytest -v
 ```
 
-São 8 testes (acima do mínimo exigido): 5 de padrões de projeto
-(Factory/Strategy) e 3 de integração da API (RF01, RF02 e RF03).
+São 8 testes: 5 de padrões de projeto (Factory/Strategy) e 3 de
+integração da API (RF01, RF02 e RF03).
 
 ## Onde estão os Padrões
 
